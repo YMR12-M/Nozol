@@ -13,7 +13,7 @@ import { ID_TYPE_LABELS, METHOD_LABELS, SOURCE_LABELS, STATUS_LABELS } from '../
 import { Icon } from '../lib/icons.jsx';
 import { holdRemaining, promoDiscountMinor, reservationActions, totalsRows } from '../lib/reservations.js';
 import {
-  Avatar, BackLink, Badge, Button, Card, ErrorState, KeyValue, Loading, Menu, MenuItem, Notice, PageHead, Plate, Stamp, useConfirm,
+  Avatar, BackLink, Badge, Button, Card, ErrorState, GrandTotal, KeyValue, Loading, Menu, MenuItem, Notice, PageHead, Plate, Stamp, useConfirm,
 } from '../components/ui/index.js';
 import {
   CancelModal, ChangeDatesModal, CheckInModal, CheckOutModal, MoveModal, NoShowModal,
@@ -452,7 +452,7 @@ export default function ReservationDetail() {
                     <span className="num" style={row.minor < 0 ? { color: 'var(--success-text)' } : undefined}>{formatMoney(row.minor, currency)}</span>
                   </div>
                 ))}
-                <div className="line total"><span>الإجمالي</span><span className="num">{formatMoney(r.total_minor, currency)}</span></div>
+                <GrandTotal minor={r.total_minor} currency={currency} />
                 {included.map((row) => (
                   <div className="line xsmall muted" key={row.key}><span>{row.label}</span><span className="num">{formatMoney(row.minor, currency)}</span></div>
                 ))}

@@ -23,11 +23,17 @@
 
 .brand { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-3) var(--sp-4); padding-inline-end: var(--sp-4); color: var(--paper-50); }
 .brand .logo { width: 40px; height: 40px; flex: none; }
-.brand b { font-family: var(--font-hand); font-weight: 700; font-size: 1.85rem; line-height: 1; color: var(--brass-200); }
+/* اسم «نُزُل» رسمٌ مخصّص (Wordmark): حروف كوفام الثقيلة محوَّلة لمسارات بنقاط نحاسية، فلا يعتمد على تحميل خطّ */
+.wordmark { display: block; width: auto; overflow: visible; }
+.wordmark .wm-body { fill: var(--wm-body, var(--text)); }
+.wordmark .wm-dot { fill: var(--wm-dot, var(--brass-500)); }
+.wordmark .wm-mark { fill: var(--wm-mark, var(--madder-500)); }
+.wordmark .wm-shadow { fill: var(--wm-shadow, color-mix(in srgb, var(--brass-300) 70%, transparent)); }
+.brand .wordmark { --wm-body: var(--paper-50); --wm-dot: var(--brass-400); --wm-mark: var(--brass-300); height: 54px; }
 .brand small { display: block; color: var(--paper-300); font-size: var(--fs-xs); margin-top: 2px; opacity: 0.8; }
 
 .nav { display: flex; flex-direction: column; gap: 3px; margin-top: var(--sp-2); }
-.nav-label { padding: var(--sp-4) var(--sp-3) var(--sp-1); font-family: var(--font-hand); font-size: 1.05rem; color: var(--brass-300); opacity: 0.9; }
+.nav-label { padding: var(--sp-4) var(--sp-3) var(--sp-1); font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--brass-300); opacity: 0.95; }
 /* فاصل دفتر: الحالي يخرج من الغلاف ويلتحم بالورقة بانحناءين مقعّرين */
 .nav a {
   position: relative; display: flex; align-items: center; gap: var(--sp-3);
@@ -59,7 +65,7 @@
 .avatar {
   width: 36px; height: 36px; flex: none; display: grid; place-items: center;
   border-radius: var(--r-md); background: var(--brass-100); color: var(--ink-900); border: 1.5px solid var(--brass-500);
-  box-shadow: 0 1px 0 rgba(92, 66, 13, 0.3); font-family: var(--font-hand); font-weight: 700; line-height: 1;
+  box-shadow: 0 1px 0 rgba(92, 66, 13, 0.3); font-family: var(--font-display); font-weight: 800; line-height: 1;
 }
 
 /* الشريط العلوي: ورقة بخطّ سفلي، واسم المنشأة لوحة نحاسية */
@@ -73,7 +79,7 @@
 .topbar .title { font-weight: 600; font-size: var(--fs-lg); }
 .plaque {
   display: inline-flex; align-items: center; gap: var(--sp-2); padding: 2px 14px 4px;
-  font-family: var(--font-hand); font-weight: 700; font-size: 1.2rem; line-height: 1.5; color: var(--text);
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.5; color: var(--text);
   background: var(--brand-soft); border: 1px solid var(--brand-line); border-radius: var(--r-md); box-shadow: inset 0 -2px 0 var(--brass-400);
 }
 .plaque svg { color: var(--accent); }
@@ -101,7 +107,7 @@
 .menu button, .menu a { display: flex; align-items: center; gap: var(--sp-2); width: 100%; padding: 9px var(--sp-3); border: 0; background: none; border-radius: var(--r-sm); text-align: start; color: var(--text); text-decoration: none; font-size: var(--fs-md); }
 .menu button:hover, .menu a:hover { background: var(--bg-hover); text-decoration: none; }
 .menu .sep { height: 3px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: var(--sp-1) 0; }
-.menu .head { padding: var(--sp-2) var(--sp-3); font-family: var(--font-hand); font-size: 1rem; color: var(--text-muted); }
+.menu .head { padding: var(--sp-2) var(--sp-3); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-muted); }
 
 /* ═══ مدخل الفندق: شاشة الدخول (وكل شاشات المصادقة) ═══ */
 .auth-screen { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -113,8 +119,8 @@
 .auth-lobby::before { content: ''; position: absolute; z-index: -1; inset: 16px; border: 1px solid color-mix(in srgb, var(--brass-300) 40%, transparent); pointer-events: none; }
 .auth-lobby::after { content: ''; position: absolute; z-index: -1; inset: 22px; border: 1px solid color-mix(in srgb, var(--brass-300) 18%, transparent); pointer-events: none; }
 .lobby-scene { width: min(340px, 78%); height: auto; }
-.lobby-sign { text-align: center; }
-.lobby-sign b { display: block; font-family: var(--font-hand); font-weight: 700; font-size: clamp(3rem, 6vw, 4.6rem); line-height: 1.1; color: var(--brass-200); }
+.lobby-sign { text-align: center; margin-top: var(--sp-3); }
+.lobby-sign .wordmark { --wm-body: var(--paper-50); --wm-dot: var(--brass-400); --wm-mark: var(--brass-300); --wm-shadow: color-mix(in srgb, var(--brass-600) 70%, transparent); height: clamp(110px, 17vw, 170px); margin-inline: auto; }
 .lobby-sign span { display: block; margin-top: var(--sp-2); font-size: var(--fs-lg); color: var(--paper-200); opacity: 0.85; }
 .lobby-foot { position: absolute; inset-block-end: 34px; font-size: var(--fs-xs); color: var(--paper-300); opacity: 0.7; }
 
@@ -127,7 +133,9 @@
 .auth-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid var(--brand-line); border-radius: var(--r-sm); pointer-events: none; opacity: 0.7; }
 .auth-brand { display: flex; align-items: center; gap: var(--sp-3); padding-bottom: var(--sp-4); margin-bottom: var(--sp-1); border-bottom: 2px dashed var(--line-strong); }
 .auth-brand .logo { width: 44px; height: 44px; }
-.auth-brand b { display: block; font-family: var(--font-hand); font-weight: 700; font-size: 2rem; line-height: 1.1; }
+.auth-brand .wordmark { height: 58px; }
+/* الأحمر على الكحلي خافت لعلامات الضمّ الصغيرة، فتتبع النحاس هناك كما في الشريط الجانبي */
+:root[data-theme='dark'] .auth-brand .wordmark { --wm-mark: var(--brass-300); --wm-dot: var(--brass-400); }
 .auth-brand small { color: var(--text-muted); }
 .auth-card h1 { font-size: var(--fs-2xl); }
 

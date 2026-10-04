@@ -1,4 +1,4 @@
-import { formatDate, formatMoney, formatNumber } from '../../lib/format.js';
+import { formatDate, formatMoney, formatNumber, moneyParts } from '../../lib/format.js';
 import { HK_COLORS, HK_LABELS, STATUS_LABELS } from '../../lib/constants.js';
 import { Icon } from '../../lib/icons.jsx';
 import { Art, ART_FOR_ICON } from './Art.jsx';
@@ -101,15 +101,29 @@ export function ErrorState({ error, onRetry }) {
   );
 }
 
-export function Stat({ label, value, sub, tone, icon }) {
+export function Stat({ label, value, unit, sub, tone, icon }) {
   return (
     <div className="card stat">
       <div className="row between">
         <span className="label">{label}</span>
         {icon && <Icon name={icon} size={18} style={{ color: 'var(--text-faint)' }} />}
       </div>
-      <span className="value num" style={tone ? { color: `var(--${tone})` } : undefined}>{value}</span>
+      <span className="value" style={tone ? { color: `var(--${tone})` } : undefined}>
+        <span className="num">{value}</span>
+        {unit && <small className="unit">{unit}</small>}
+      </span>
       {sub && <span className="sub">{sub}</span>}
+    </div>
+  );
+}
+
+/** سطر «الإجمالي» داخل `.totals`: التسمية بصوت اللافتة والمبلغ بأرقام لوحة النقاط والعملة صغيرة بجواره */
+export function GrandTotal({ minor, currency = 'EGP', label = 'الإجمالي' }) {
+  const { amount, unit } = moneyParts(minor, currency);
+  return (
+    <div className="line total">
+      <span>{label}</span>
+      <span className="grand"><span className="num">{amount}</span><small className="unit">{unit}</small></span>
     </div>
   );
 }

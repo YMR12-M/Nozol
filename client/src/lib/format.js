@@ -12,9 +12,7 @@ const moneyFormats = new Map();
 
 export const formatNumber = (value) => (value === null || value === undefined ? '—' : numberFormat.format(value));
 
-/** قروش ← «1,250.00 ج.م.» */
-export function formatMoney(minor, currency = 'EGP', { compact = false } = {}) {
-  if (minor === null || minor === undefined) return '—';
+function moneyFormat(currency, compact) {
   const key = `${currency}:${compact}`;
   if (!moneyFormats.has(key)) {
     moneyFormats.set(key, new Intl.NumberFormat(LOCALE, {
@@ -24,8 +22,26 @@ export function formatMoney(minor, currency = 'EGP', { compact = false } = {}) {
       maximumFractionDigits: compact ? 0 : 2,
     }));
   }
+  return moneyFormats.get(key);
+}
+
+/** قروش ← «1,250.00 ج.م.» */
+export function formatMoney(minor, currency = 'EGP', { compact = false } = {}) {
+  if (minor === null || minor === undefined) return '—';
   // Intl يضع LRM قبل إشارة السالب فيقلب مكان «ج.م.» للمبالغ السالبة (الخصم) عن الموجبة داخل `.num`
-  return moneyFormats.get(key).format(minor / 100).replace(/‎/g, '');
+  return moneyFormat(currency, compact).format(minor / 100).replace(/‎/g, '');
+}
+
+/**
+ * قروش ← { amount: '14,146', unit: 'ج.م.' } لعرض الرقم كبيرًا والعملة صغيرة بجواره (بطاقات الأرقام).
+ * العملة بحجم الرقم نفسه تُعرِّض البطاقة فتفيض على جارتها كلما اتّسعت أرقام الخطّ.
+ */
+export function moneyParts(minor, currency = 'EGP', { compact = false } = {}) {
+  if (minor === null || minor === undefined) return { amount: '—', unit: '' };
+  const parts = moneyFormat(currency, compact).formatToParts(minor / 100);
+  const unit = parts.find((part) => part.type === 'currency')?.value ?? '';
+  const amount = parts.filter((part) => part.type !== 'currency' && part.type !== 'literal').map((part) => part.value).join('').replace(/[‎؜]/g, '');
+  return { amount, unit };
 }
 
 /** رقم عادي بخانتين من القروش — لحقول الإدخال */

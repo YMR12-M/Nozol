@@ -269,7 +269,7 @@ function UnitRow({ row, days, from, span, today, canBook, canBlock, onBook, onOp
             onClick={() => onOpen(reservation.id)}
           >
             {Boolean(reservation.is_vip) && <Icon name="star" size={12} />}
-            <span>{reservation.guest_name}</span>
+            <span dir="auto">{reservation.guest_name}</span>
             {owes && <span aria-label="رصيد مستحق" title="رصيد مستحق">●</span>}
           </button>
         );

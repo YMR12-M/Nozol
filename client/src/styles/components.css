@@ -40,12 +40,12 @@
 }
 /* رأس البطاقة: عنوان بمعيّن نحاسي ثم خط مزدوج كعناوين الدفاتر */
 .card > .card-head {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2) var(--sp-3);
   padding: var(--sp-3) var(--sp-5); border-bottom: 3px double var(--line);
 }
 .card > .card-body { padding: var(--sp-5); }
 .card > .card-body.flush { padding: 0; }
-.card-title { display: flex; align-items: center; gap: 10px; font-size: var(--fs-lg); font-weight: 600; }
+.card-title { display: flex; align-items: center; gap: 10px; font-size: var(--fs-lg); font-weight: 700; white-space: nowrap; }
 .card-title::before { content: ''; flex: none; width: 9px; height: 9px; background: var(--brass-400); transform: rotate(45deg); }
 .card.pad { padding: var(--sp-5); }
 .card.tint { background: var(--brand-soft); border-color: var(--brand-line); box-shadow: none; }
@@ -173,6 +173,7 @@
 .modal.wide { width: min(820px, 100%); }
 .modal.narrow { width: min(420px, 100%); }
 .modal-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-4) var(--sp-5); border-bottom: 3px double var(--line); }
+.modal-head h2 { font-size: var(--fs-lg); }
 .modal-body { padding: var(--sp-5); overflow-y: auto; }
 .modal-foot { display: flex; justify-content: flex-end; gap: var(--sp-2); padding: var(--sp-4) var(--sp-5); border-top: 1px solid var(--line); flex-wrap: wrap; }
 
@@ -231,10 +232,15 @@
 /* ── ترقيم الصفحات ── */
 .pagination { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--text-muted); }
 
-/* ── أرقام كبيرة بخطّ اللوحات (تُصفّ في .stat-row كشريط واحد لا كبطاقات متطابقة) ── */
+/* ── لوحة الأرقام: رقم نقطي كشاشة الاستقبال (تُصفّ في .stat-row كشريط واحد لا كبطاقات متطابقة) ── */
 .stat { display: flex; flex-direction: column; gap: 2px; padding: var(--sp-4) var(--sp-5); }
 .stat .label { color: var(--text-muted); font-size: var(--fs-sm); font-weight: 600; }
-.stat .value { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 600; line-height: 1.15; }
+.stat .value { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 700; line-height: 1.1; }
+/* وزن 600 لا أثقل: عند 700 فما فوق تمتلئ فتحة الصفر فيلتبس بالثمانية، وهذا رقم مال */
+.stat .value .num { font-family: var(--font-led); font-weight: 600; font-size: 1.3em; line-height: 1; }
+.stat .value .unit { font-family: var(--font); font-size: var(--fs-sm); font-weight: 600; color: var(--text-muted); }
+/* في «المكتب بالليل» تتوهّج الأرقام كشاشة مضاءة */
+:root[data-theme='dark'] .stat .value .num { text-shadow: 0 0 12px color-mix(in srgb, var(--brass-300) 38%, transparent); }
 .stat .sub { font-size: var(--fs-xs); color: var(--text-muted); }
 
 .kv { display: grid; grid-template-columns: minmax(110px, 38%) 1fr; gap: 0 var(--sp-4); font-size: var(--fs-md); }
@@ -257,7 +263,7 @@ button.chip[aria-pressed='true'] { background: var(--brand-soft); border-color: 
 /* لوحة رقم الغرفة: نحاس منقوش بمسمارين */
 .plate {
   position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 2.8em;
-  padding: 0 0.85em; font-family: var(--font-display); font-weight: 600; font-size: 0.95em; line-height: 1.75;
+  padding: 0 0.85em; font-family: var(--font-display); font-weight: 700; font-size: 0.95em; line-height: 1.75;
   color: var(--brass-700); background: var(--brass-200); border: 1px solid var(--brass-400); border-radius: var(--r-md);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 0 rgba(92, 66, 13, 0.28), 0 1px 0 rgba(92, 66, 13, 0.3);
 }
@@ -272,7 +278,7 @@ button.chip[aria-pressed='true'] { background: var(--brand-soft); border-color: 
 .stamp {
   --stamp-ink: var(--st-pending-fg);
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 2px 16px 4px; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; line-height: 1.5;
+  padding: 2px 16px 4px; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; line-height: 1.5;
   color: var(--stamp-ink); border: 3px double var(--stamp-ink); border-radius: 4px;
   transform: rotate(-3deg); filter: url(#ink-rough); opacity: 0.94; white-space: nowrap;
   animation: stamp-in 380ms var(--ease) both;
@@ -302,7 +308,7 @@ button.chip[aria-pressed='true'] { background: var(--brand-soft); border-color: 
 /* علّاقة باب (حالة النظافة): بطاقة بثقب تُعلَّق على المقبض */
 .hanger { position: relative; display: inline-flex; flex-direction: column; align-items: center; gap: 2px; min-width: 76px; padding: 14px 10px 8px; background: var(--bg-raised); border: 1px solid var(--line-strong); border-top: 4px solid var(--hk-color, var(--line-strong)); border-radius: 12px 12px var(--r-sm) var(--r-sm); }
 .hanger::before { content: ''; position: absolute; top: 4px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; border: 1.5px solid var(--line-strong); background: var(--bg); }
-.hanger b { font-family: var(--font-display); font-size: var(--fs-xl); line-height: 1.2; }
+.hanger b { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-xl); line-height: 1.2; }
 
 /* رسوم الإيصال: نقاط وصل بين الاسم والمبلغ (النقاط تحت النص تُخفى بخلفية الورقة) */
 .leader { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); background-image: radial-gradient(circle, var(--ink-300) 1px, transparent 1.4px); background-size: 7px 4px; background-repeat: repeat-x; background-position: 0 calc(100% - 5px); }

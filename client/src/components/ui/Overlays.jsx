@@ -46,7 +46,7 @@ export function Modal({ open, onClose, title, children, footer, size = '', dismi
     <div className="overlay" onMouseDown={(event) => { if (event.target === event.currentTarget && dismissible) onClose(); }}>
       <div className={`modal ${size}`} role="dialog" aria-modal="true" aria-labelledby={titleId} ref={ref}>
         <div className="modal-head">
-          <h2 id={titleId} style={{ fontSize: 'var(--fs-lg)' }}>{title}</h2>
+          <h2 id={titleId}>{title}</h2>
           {dismissible && <Button variant="ghost" size="sm" icon="close" aria-label="إغلاق" onClick={onClose} />}
         </div>
         <div className="modal-body">{children}</div>

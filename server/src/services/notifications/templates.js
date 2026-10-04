@@ -7,16 +7,20 @@ import { env } from '../../config/env.js';
 const esc = (value) => String(value ?? '')
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// خطّ الرسائل: عملاء البريد يحجبون خطوط الويب (كوفام وهاندجت غير متاحَين فيها)، فنستعمل خطّ الجهاز نفسه،
+// ويحمل صوتَ اللافتة فيها الوزنُ الأثقل والحجم الأكبر للعنوان لا اختلافُ الخطّ.
+const FONT = "'Segoe UI','Geeza Pro',Tahoma,'Helvetica Neue',Arial,sans-serif";
+
 function layout({ title, body, button, footer }) {
   const brand = esc(env.brand.name);
   const buttonHtml = button
     ? `<p style="margin:28px 0"><a href="${esc(button.url)}" style="background:#0e6b73;color:#fff;text-decoration:none;padding:12px 26px;border-radius:8px;display:inline-block;font-weight:700">${esc(button.label)}</a></p>`
     : '';
-  return `<!doctype html><html dir="rtl" lang="ar"><body style="margin:0;background:#f4f1ea;font-family:Tahoma,Arial,sans-serif;color:#1d2b2e">
+  return `<!doctype html><html dir="rtl" lang="ar"><body style="margin:0;background:#f4f1ea;font-family:${FONT};color:#1d2b2e">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border-radius:12px;overflow:hidden">
-<tr><td style="background:#0e6b73;color:#fff;padding:18px 28px;font-size:20px;font-weight:700">${brand}</td></tr>
-<tr><td style="padding:28px;line-height:1.9;font-size:15px"><h2 style="margin:0 0 14px;font-size:18px">${esc(title)}</h2>${body}${buttonHtml}</td></tr>
+<tr><td style="background:#0e6b73;color:#fff;padding:16px 28px;font-size:24px;font-weight:800">${brand}</td></tr>
+<tr><td style="padding:28px;line-height:1.9;font-size:15px"><h2 style="margin:0 0 14px;font-size:21px;font-weight:800">${esc(title)}</h2>${body}${buttonHtml}</td></tr>
 <tr><td style="padding:16px 28px;background:#faf8f3;color:#6b7a7d;font-size:12px">${footer ?? `رسالة تلقائية من ${brand}.`}</td></tr>
 </table></td></tr></table></body></html>`;
 }

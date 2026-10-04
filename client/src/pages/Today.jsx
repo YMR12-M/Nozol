@@ -4,11 +4,11 @@ import { useProperty } from '../context/PropertyContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { useDocumentTitle } from '../lib/hooks.js';
-import { formatClock, formatMoney, formatPhone, formatWeekday, nightsLabel, percent } from '../lib/format.js';
+import { formatClock, formatMoney, formatPhone, formatWeekday, moneyParts, nightsLabel, percent } from '../lib/format.js';
 import { METHOD_LABELS } from '../lib/constants.js';
 import { Icon } from '../lib/icons.jsx';
 import {
-  Badge, Button, Card, Doors, EmptyState, ErrorState, Hanger, Loading, Notice, Plates, Stat, StatusBadge, TearCalendar,
+  Badge, Button, Card, Doors, EmptyState, ErrorState, GrandTotal, Hanger, Loading, Notice, Plates, Stat, StatusBadge, TearCalendar,
 } from '../components/ui/index.js';
 
 /** تحية بصوت الاستقبال المصري حسب ساعة المنشأة */
@@ -26,8 +26,8 @@ function GuestRow({ reservation, currency, action }) {
     <div className="list-row">
       <Link to={`/reservations/${reservation.id}`} className="list-link">
         <div className="main">
-          <div className="row" style={{ gap: 8 }}>
-            <b className="truncate">{reservation.guest_name}</b>
+          <div className="row wrap" style={{ gap: 8 }}>
+            <b className="truncate" dir="auto">{reservation.guest_name}</b>
             {Boolean(reservation.is_vip) && <Badge tone="accent">VIP</Badge>}
             <span className="code-pill">{reservation.code}</span>
           </div>
@@ -84,13 +84,14 @@ export default function Today() {
   const data = query.data;
   const { stats } = data;
   const currency = property?.currency ?? 'EGP';
+  const unpaid = moneyParts(stats.unpaid_in_house_minor, currency, { compact: true });
 
   return (
     <div className="page">
       <header className="day-head">
         <TearCalendar iso={data.date} />
         <div className="day-greeting">
-          <span className="hand day-hello">{greetingFor(property?.timezone ?? 'Africa/Cairo')} يا {user.full_name.trim().split(/\s+/)[0]}</span>
+          <span className="display day-hello">{greetingFor(property?.timezone ?? 'Africa/Cairo')} يا {user.full_name.trim().split(/\s+/)[0]}</span>
           <h1>{`اليوم — ${formatWeekday(data.date)}`}</h1>
           <p>حركة {property?.name_ar} النهاردة</p>
         </div>
@@ -123,7 +124,7 @@ export default function Today() {
         <Stat label="مقيمون الآن" value={stats.in_house} icon="bed" />
         <Stat label="الإشغال الليلة" value={percent(stats.occupancy_pct)} sub={`${stats.occupied_tonight} من ${stats.available_tonight} وحدة${stats.held_tonight ? ` (+${stats.held_tonight} محجوزة مؤقتًا)` : ''}`} icon="chart" />
         <Stat label="حجوزات معلّقة" value={stats.pending_bookings} icon="clock" tone={stats.pending_bookings > 0 ? 'warning' : undefined} />
-        <Stat label="مستحقات المقيمين" value={formatMoney(stats.unpaid_in_house_minor, currency, { compact: true })} sub={`${stats.unpaid_in_house_count} حجز`} icon="dollar" tone={stats.unpaid_in_house_minor > 0 ? 'danger' : undefined} />
+        <Stat label="مستحقات المقيمين" value={unpaid.amount} unit={unpaid.unit} sub={`${stats.unpaid_in_house_count} حجز`} icon="dollar" tone={stats.unpaid_in_house_minor > 0 ? 'danger' : undefined} />
       </div>
 
       <Card className="doors-card" title="أبواب الليلة" actions={<span className="muted small"><span className="num">{stats.occupied_tonight}</span> من <span className="num">{stats.available_tonight}</span></span>}>
@@ -184,7 +185,7 @@ export default function Today() {
                 {data.payments_today.map((row) => (
                   <div className="line" key={row.method}><span>{METHOD_LABELS[row.method]}</span><b className="num">{formatMoney(row.net_minor, currency)}</b></div>
                 ))}
-                <div className="line total"><span>الإجمالي</span><span className="num">{formatMoney(data.payments_today.reduce((sum, row) => sum + row.net_minor, 0), currency)}</span></div>
+                <GrandTotal minor={data.payments_today.reduce((sum, row) => sum + row.net_minor, 0)} currency={currency} />
               </div>
             )}
           </Card>

@@ -3,16 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import '@fontsource/ibm-plex-sans-arabic/400.css';
-import '@fontsource/ibm-plex-sans-arabic/500.css';
-import '@fontsource/ibm-plex-sans-arabic/600.css';
-import '@fontsource/ibm-plex-sans-arabic/700.css';
-// خطّان بشخصية: كوفي هندسي للوحات والأرقام، ورقعة لمسة اليد (انظر docs/BRAND.md)
-import '@fontsource/reem-kufi/500.css';
-import '@fontsource/reem-kufi/600.css';
-import '@fontsource/reem-kufi/700.css';
-import '@fontsource/aref-ruqaa/400.css';
-import '@fontsource/aref-ruqaa/700.css';
+// ثلاثة أصوات (انظر docs/BRAND.md): القاهرة للدفتر، وكوفام للافتة، وهاندجت للوحة الأرقام. كلها متغيّرة الوزن.
+import '@fontsource-variable/cairo/index.css';
+import '@fontsource-variable/kufam/index.css';
+import '@fontsource-variable/handjet/index.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';

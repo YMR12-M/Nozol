@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useProperty } from '../../context/PropertyContext.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx';
-import { Icon, Logo } from '../../lib/icons.jsx';
+import { Icon, Logo, Wordmark } from '../../lib/icons.jsx';
 import { ROLE_LABELS } from '../../lib/constants.js';
 import { Avatar, Drawer, Menu, MenuItem, Notice } from '../ui/index.js';
 
@@ -78,7 +78,7 @@ function SidebarContent({ onNavigate }) {
     <>
       <div className="brand">
         <Logo size={40} />
-        <div><b>نُزُل</b><small>إدارة الضيافة</small></div>
+        <div><Wordmark /><small>إدارة الضيافة</small></div>
       </div>
       <Navigation onNavigate={onNavigate} />
       <div className="sidebar-foot">

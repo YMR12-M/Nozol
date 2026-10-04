@@ -108,11 +108,18 @@
   --hk-clean: var(--forest-500);
   --hk-inspected: var(--sea-500);
 
-  /* ═══ 6) الخطوط: ثلاثة أدوار لكل منها وظيفة ═══════════════ */
-  --font:         'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;   /* القراءة */
-  --font-display: 'Reem Kufi', 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;          /* لوحات الغرف والأرقام والعناوين */
-  --font-hand:    'Aref Ruqaa', 'IBM Plex Sans Arabic', serif;                           /* لمسة اليد: التحية، الأسماء على الأشرطة */
-  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* ═══ 6) الخطوط: ثلاثة أصوات من لافتة الفندق ═══════════════════
+     الكوفي (Kufam) — صوت اللافتة: العناوين واسم المنشأة وأرقام الغرف والأختام ونتيجة الحائط.
+       كوفي ثقيل بنقاط مدوّرة كالمسامير، من عمارة القاهرة: الأبواب المقوّسة واللوحات النحاسية.
+     القاهرة (Cairo) — صوت الدفتر: كل ما يُقرأ ويُمسح بالعين (نصوص وجداول وحقول وأزرار وأسماء النزلاء).
+       تصميم مصري، وأرقامه اللاتينية متساوية العرض فتصطفّ الأعمدة بلا إعداد.
+     النقاط (Handjet) — صوت لوحة الأرقام: أرقام شريط الإحصاءات ومجموع الإيصال، كشاشة الاستقبال
+       وطابعة الإيصالات. للأرقام وحدها (هو بلا وظيفة للكلام العربي).
+     لا رابع لها. وكلها متغيّرة الوزن فملفّ واحد لكل خطّ. */
+  --font:         'Cairo Variable', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  --font-display: 'Kufam Variable', 'Cairo Variable', 'Segoe UI', Tahoma, sans-serif;
+  --font-led:     'Handjet Variable', 'Cairo Variable', ui-monospace, monospace;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;   /* أكواد الحجز فقط */
 
   --fs-xs: 0.75rem;
   --fs-sm: 0.8125rem;
@@ -137,6 +144,9 @@
   --r-lg: 5px;
   --r-xl: 8px;
   --r-pill: 999px;
+
+  /* ظلّ طباعة مزاح للعناوين الكبرى (كأن طبقتَي الطباعة لم تنطبقا، كما في رسوم الريزو) */
+  --riso: 2px 2px 0 color-mix(in srgb, var(--brass-300) 70%, transparent);
 
   /* ظلال «ورق على مكتب»: شفة رفيعة، لا هالة ناعمة */
   --shadow-sm: 0 1px 0 rgba(92, 66, 13, 0.16);
@@ -218,6 +228,7 @@
   --shadow-md: 0 1px 0 rgba(0, 0, 0, 0.5), 0 12px 24px -12px rgba(0, 0, 0, 0.7);
   --shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.55), 0 30px 50px -20px rgba(0, 0, 0, 0.85);
   --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--brass-300);
+  --riso: 2px 2px 0 color-mix(in srgb, var(--brass-400) 45%, transparent);
 
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .92  0 0 0 0 .84  0 0 0 0 .66  0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
   --hatch: repeating-linear-gradient(135deg, transparent 0 5px, rgba(232, 214, 170, 0.18) 5px 6px);

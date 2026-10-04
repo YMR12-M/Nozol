@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useForm } from '../lib/forms.js';
 import { useDocumentTitle } from '../lib/hooks.js';
-import { Logo } from '../lib/icons.jsx';
+import { Logo, Wordmark } from '../lib/icons.jsx';
 import { Button, Field, Input, LobbyScene, Notice } from '../components/ui/index.js';
 
 /**
@@ -16,7 +16,7 @@ export function AuthLayout({ title, subtitle, children, footer }) {
       <section className="auth-lobby" aria-hidden="true">
         <LobbyScene />
         <div className="lobby-sign">
-          <b>نُزُل</b>
+          <Wordmark shadow />
           <span>اتفضّل.. الضيافة تبدأ من دفتر منظّم</span>
         </div>
         <small className="lobby-foot">© نُزُل</small>
@@ -25,7 +25,7 @@ export function AuthLayout({ title, subtitle, children, footer }) {
         <div className="auth-card stack lg">
           <div className="auth-brand">
             <Logo size={44} />
-            <div><b>نُزُل</b><small>إدارة الضيافة</small></div>
+            <div><Wordmark /><small>إدارة الضيافة</small></div>
           </div>
           <div>
             <h1>{title}</h1>

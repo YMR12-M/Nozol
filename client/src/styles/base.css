@@ -16,11 +16,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* العناوين بخطّ اللوحات (كوفي هندسي)؛ المتن بخطّ القراءة. لا تباعد حروف في العربية: يقطع الاتصال */
-h1, h2, h3, h4 { margin: 0; line-height: 1.35; font-weight: 600; font-family: var(--font-display); }
-h1 { font-size: var(--fs-2xl); font-weight: 700; }
+/* العناوين بصوت اللافتة (كوفي ثقيل)؛ المتن بصوت الدفتر. لا تباعد حروف في العربية: يقطع الاتصال.
+   العنوان الأكبر بظلّ طباعة مزاح (--riso)، والباقي بلا ظلّ كي لا يزدحم الصفّ. */
+h1, h2, h3, h4 { margin: 0; line-height: 1.45; font-weight: 700; font-family: var(--font-display); }
+h1 { font-size: var(--fs-2xl); font-weight: 800; text-shadow: var(--riso); }
 h2 { font-size: var(--fs-xl); }
 h3 { font-size: var(--fs-lg); }
+h4 { font-size: var(--fs-md); }
 p { margin: 0; }
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -37,8 +39,8 @@ hr { border: 0; border-top: 3px double var(--line); margin: var(--sp-4) 0; }
 /* نطاق تواريخ «16 أكتوبر ← 18 أكتوبر»: يتبع اتجاه الصفحة (الوصول يمينًا والسهم نحو المغادرة)، عكس `.num` الذي يقلبه */
 .range { unicode-bidi: isolate; white-space: nowrap; }
 .mono { font-family: var(--font-mono); font-size: 0.92em; }
-.display { font-family: var(--font-display); }
-.hand { font-family: var(--font-hand); }
+.display { font-family: var(--font-display); font-weight: 800; line-height: 1.45; }
+.led { font-family: var(--font-led); font-weight: 600; }
 
 .muted { color: var(--text-muted); }
 .faint { color: var(--text-faint); }

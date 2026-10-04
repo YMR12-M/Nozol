@@ -15,7 +15,7 @@ import {
   pricingRoom, quoteTotals, restrictionLines, stayIssue, totalsRows,
 } from '../lib/reservations.js';
 import {
-  Button, Card, Checkbox, Field, Input, MoneyInput, Notice, PageHead, Segmented, Select, Skeleton, Stepper, Switch, Textarea,
+  Button, Card, Checkbox, Field, GrandTotal, Input, MoneyInput, Notice, PageHead, Segmented, Select, Skeleton, Stepper, Switch, Textarea,
 } from '../components/ui/index.js';
 import GuestPicker from '../components/reservation/GuestPicker.jsx';
 import RoomLine from '../components/reservation/RoomLine.jsx';
@@ -462,7 +462,7 @@ export default function NewReservation() {
                         <span className="num" style={row.minor < 0 ? { color: 'var(--success-text)' } : undefined}>{formatMoney(row.minor, currency)}</span>
                       </div>
                     ))}
-                    <div className="line total"><span>الإجمالي</span><span className="num">{formatMoney(combined.total_minor, currency)}</span></div>
+                    <GrandTotal minor={combined.total_minor} currency={currency} />
                     {summaryRows.included.map((row) => (
                       <div className="line xsmall muted" key={row.key}><span>{row.label}</span><span className="num">{formatMoney(row.minor, currency)}</span></div>
                     ))}
