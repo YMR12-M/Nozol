@@ -7,7 +7,7 @@ import { useDebounce, useDocumentTitle } from '../lib/hooks.js';
 import { formatDayMonth, formatMoney, formatPhone, nightsLabel } from '../lib/format.js';
 import { SOURCE_LABELS, STATUS_LABELS, STATUS_ORDER } from '../lib/constants.js';
 import {
-  Badge, Button, Card, Checkbox, EmptyState, ErrorState, Field, Input, Loading, PageHead, Pagination, SearchInput,
+  Badge, Button, Card, Checkbox, EmptyState, ErrorState, Field, Input, Loading, PageHead, Pagination, Plates, SearchInput,
   Select, StatusBadge,
 } from '../components/ui/index.js';
 
@@ -117,7 +117,7 @@ export default function Reservations() {
         ) : (
           <>
             <div className="table-wrap" style={{ opacity: query.isPlaceholderData ? 0.6 : 1 }}>
-              <table className="table hover">
+              <table className="table ledger wide hover">
                 <thead>
                   <tr>
                     <th>الحجز</th><th>النزيل</th><th>الوحدة</th><th>الإقامة</th><th>الحالة</th>
@@ -133,12 +133,12 @@ export default function Reservations() {
                       </td>
                       <td>
                         <div className="row" style={{ gap: 6 }}>
-                          <b>{reservation.guest_name}</b>
-                          {reservation.is_vip && <Badge tone="accent">VIP</Badge>}
+                          <b className="nowrap">{reservation.guest_name}</b>
+                          {Boolean(reservation.is_vip) && <Badge tone="accent">VIP</Badge>}
                         </div>
                         <div className="xsmall muted num">{formatPhone(reservation.guest_phone)}</div>
                       </td>
-                      <td className="num">{reservation.unit_codes ?? '—'}</td>
+                      <td><Plates codes={reservation.unit_codes} /></td>
                       <td>
                         <span className="range">{formatDayMonth(reservation.check_in)} ← {formatDayMonth(reservation.check_out)}</span>
                         <div className="xsmall muted">{nightsLabel(reservation.nights)} · {reservation.adults + reservation.children} أفراد</div>

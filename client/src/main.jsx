@@ -7,6 +7,12 @@ import '@fontsource/ibm-plex-sans-arabic/400.css';
 import '@fontsource/ibm-plex-sans-arabic/500.css';
 import '@fontsource/ibm-plex-sans-arabic/600.css';
 import '@fontsource/ibm-plex-sans-arabic/700.css';
+// خطّان بشخصية: كوفي هندسي للوحات والأرقام، ورقعة لمسة اليد (انظر docs/BRAND.md)
+import '@fontsource/reem-kufi/500.css';
+import '@fontsource/reem-kufi/600.css';
+import '@fontsource/reem-kufi/700.css';
+import '@fontsource/aref-ruqaa/400.css';
+import '@fontsource/aref-ruqaa/700.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';

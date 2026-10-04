@@ -13,7 +13,7 @@ import { ID_TYPE_LABELS, METHOD_LABELS, SOURCE_LABELS, STATUS_LABELS } from '../
 import { Icon } from '../lib/icons.jsx';
 import { holdRemaining, promoDiscountMinor, reservationActions, totalsRows } from '../lib/reservations.js';
 import {
-  Avatar, BackLink, Badge, Button, Card, ErrorState, KeyValue, Loading, Menu, MenuItem, Notice, PageHead, StatusBadge, useConfirm,
+  Avatar, BackLink, Badge, Button, Card, ErrorState, KeyValue, Loading, Menu, MenuItem, Notice, PageHead, Plate, Stamp, useConfirm,
 } from '../components/ui/index.js';
 import {
   CancelModal, ChangeDatesModal, CheckInModal, CheckOutModal, MoveModal, NoShowModal,
@@ -133,8 +133,8 @@ export default function ReservationDetail() {
         title={(
           <span className="row wrap" style={{ gap: 10 }}>
             حجز <span className="code-pill">{r.code}</span>
-            <StatusBadge status={r.status} />
-            {r.is_vip && <Badge tone="accent">VIP</Badge>}
+            <Stamp status={r.status} />
+            {Boolean(r.is_vip) && <Badge tone="accent">VIP</Badge>}
           </span>
         )}
         description={`${r.guest_name} · ${nightsLabel(r.nights)} · ${peopleLabel(r.adults, r.children)}`}
@@ -168,7 +168,7 @@ export default function ReservationDetail() {
         {lateArrival && <Notice tone="warning" icon="clock">كان المفروض يصل <b className="num">{formatDate(r.check_in)}</b> — سجّل دخوله أو سجّل «عدم حضور».</Notice>}
         {stayEnded && <Notice tone="warning" icon="alert">فترة الحجز انتهت ولم يُسجَّل دخول — سجّل «عدم حضور» أو ألغِ الحجز.</Notice>}
         {overstayed && <Notice tone="danger" icon="alert">النزيل تجاوز موعد المغادرة (<b className="num">{formatDate(r.check_out)}</b>) — سجّل خروجه أو مدّد الإقامة.</Notice>}
-        {r.is_blacklisted && <Notice tone="danger" icon="ban">النزيل ده في القائمة السوداء.</Notice>}
+        {Boolean(r.is_blacklisted) && <Notice tone="danger" icon="ban">النزيل ده في القائمة السوداء.</Notice>}
         {released && (
           <Notice tone="danger" icon="ban">
             {STATUS_LABELS[r.status]}{r.cancel_reason ? `: ${r.cancel_reason}` : ''}{r.cancelled_at ? ` — ${formatDateTime(r.cancelled_at)}` : ''}
@@ -217,7 +217,7 @@ export default function ReservationDetail() {
                       return (
                         <tr key={segment.id}>
                           <td>
-                            <div className="row" style={{ gap: 6 }}><b className="num">{segment.unit_code}</b>{here && <Badge tone="success">النزيل هنا</Badge>}</div>
+                            <div className="row" style={{ gap: 6 }}><Plate>{segment.unit_code}</Plate>{here && <Badge tone="success">النزيل هنا</Badge>}</div>
                             <div className="xsmall muted">{segment.unit_type_name_ar}</div>
                           </td>
                           <td className="nowrap">
@@ -268,7 +268,7 @@ export default function ReservationDetail() {
           {/* الحساب */}
           <Card title="الحساب" actions={actions.addItem && <Button size="sm" icon="plus" onClick={() => open('item')}>إضافة بند</Button>} flush>
             <div className="table-wrap">
-              <table className="table">
+              <table className="table ledger">
                 <thead><tr><th>البند</th><th style={{ textAlign: 'end' }}>المبلغ</th><th /></tr></thead>
                 <tbody>
                   {!released && r.segments.map((segment) => (
@@ -326,7 +326,7 @@ export default function ReservationDetail() {
           >
             {r.payments.length === 0 ? <p className="muted center" style={{ padding: 'var(--sp-5)' }}>لم تُسجَّل دفعات بعد.</p> : (
               <div className="table-wrap">
-                <table className="table">
+                <table className="table ledger">
                   <thead><tr><th>الوقت</th><th>الطريقة</th><th style={{ textAlign: 'end' }}>المبلغ</th><th>بواسطة</th><th /></tr></thead>
                   <tbody>
                     {r.payments.map((payment) => {
@@ -422,7 +422,7 @@ export default function ReservationDetail() {
               <div className="row">
                 <Avatar name={r.guest_name} size={44} />
                 <div className="grow"><b>{r.guest_name}</b></div>
-                {r.is_vip && <Badge tone="accent">VIP</Badge>}
+                {Boolean(r.is_vip) && <Badge tone="accent">VIP</Badge>}
               </div>
               <KeyValue items={[
                 r.guest_phone && {

@@ -165,7 +165,7 @@ export default function NewReservation() {
   /* ── النزيل والبريد ── */
   const guestEmail = guest?.kind === 'existing' ? guest.data.email : guestForm.values.email.trim();
   const canEmail = Boolean(guestEmail) && (guest?.kind !== 'new' || EMAIL.test(guestEmail));
-  const chosenGuestBlacklisted = guest?.kind === 'existing' && guest.data.is_blacklisted;
+  const chosenGuestBlacklisted = guest?.kind === 'existing' && Boolean(guest.data.is_blacklisted);
   const needsRestrictionOverride = Boolean(preview && !preview.bookable) || serverRestrictions.length > 0;
 
   /* ── ما يمنع الحفظ (يُعرض للموظف قائمةً) ── */

@@ -4,12 +4,21 @@ import { useProperty } from '../context/PropertyContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { useDocumentTitle } from '../lib/hooks.js';
-import { formatClock, formatDate, formatMoney, formatPhone, formatWeekday, nightsLabel, percent } from '../lib/format.js';
-import { HK_COLORS, HK_LABELS, METHOD_LABELS } from '../lib/constants.js';
+import { formatClock, formatMoney, formatPhone, formatWeekday, nightsLabel, percent } from '../lib/format.js';
+import { METHOD_LABELS } from '../lib/constants.js';
 import { Icon } from '../lib/icons.jsx';
 import {
-  Badge, Button, Card, EmptyState, ErrorState, Loading, Notice, PageHead, Stat, StatusBadge,
+  Badge, Button, Card, Doors, EmptyState, ErrorState, Hanger, Loading, Notice, Plates, Stat, StatusBadge, TearCalendar,
 } from '../components/ui/index.js';
+
+/** تحية بصوت الاستقبال المصري حسب ساعة المنشأة */
+function greetingFor(timeZone) {
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hourCycle: 'h23', timeZone }).format(new Date()));
+  if (hour < 5) return 'سهرة سعيدة';
+  if (hour < 12) return 'صباح الخير';
+  if (hour < 17) return 'نهارك سعيد';
+  return 'مساء الخير';
+}
 
 /** صفّ حجز: الرابط يغطّي المحتوى، والإجراء السريع (زر) خارجه كي لا يتداخل تفاعلان */
 function GuestRow({ reservation, currency, action }) {
@@ -19,14 +28,14 @@ function GuestRow({ reservation, currency, action }) {
         <div className="main">
           <div className="row" style={{ gap: 8 }}>
             <b className="truncate">{reservation.guest_name}</b>
-            {reservation.is_vip && <Badge tone="accent">VIP</Badge>}
+            {Boolean(reservation.is_vip) && <Badge tone="accent">VIP</Badge>}
             <span className="code-pill">{reservation.code}</span>
           </div>
           <div className="muted small row wrap" style={{ gap: 12 }}>
-            <span>وحدة {reservation.unit_codes ?? '—'}</span>
+            <Plates codes={reservation.unit_codes} />
             <span className="num">{reservation.adults} + {reservation.children}</span>
             <span>{nightsLabel(reservation.nights)}</span>
-            {reservation.expected_arrival && <span className="num">وصول {formatClock(reservation.expected_arrival)}</span>}
+            {reservation.expected_arrival && <span>وصول <span className="num">{formatClock(reservation.expected_arrival)}</span></span>}
             {reservation.guest_phone && <span className="num">{formatPhone(reservation.guest_phone)}</span>}
           </div>
         </div>
@@ -45,7 +54,7 @@ function GuestRow({ reservation, currency, action }) {
 export default function Today() {
   useDocumentTitle('اليوم');
   const { api, property } = useProperty();
-  const { can } = useAuth();
+  const { user, can } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -78,11 +87,15 @@ export default function Today() {
 
   return (
     <div className="page">
-      <PageHead
-        title={`اليوم — ${formatWeekday(data.date)}`}
-        description={formatDate(data.date)}
-        actions={can('reservations.write') && <Button variant="primary" icon="plus" onClick={() => navigate('/reservations/new')}>حجز جديد</Button>}
-      />
+      <header className="day-head">
+        <TearCalendar iso={data.date} />
+        <div className="day-greeting">
+          <span className="hand day-hello">{greetingFor(property?.timezone ?? 'Africa/Cairo')} يا {user.full_name.trim().split(/\s+/)[0]}</span>
+          <h1>{`اليوم — ${formatWeekday(data.date)}`}</h1>
+          <p>حركة {property?.name_ar} النهاردة</p>
+        </div>
+        {can('reservations.write') && <Button variant="primary" size="lg" icon="plus" onClick={() => navigate('/reservations/new')}>حجز جديد</Button>}
+      </header>
 
       {(data.overdue_departures.length > 0 || stats.pending_expiring_soon > 0 || stats.urgent_maintenance > 0) && (
         <div className="stack sm">
@@ -112,6 +125,15 @@ export default function Today() {
         <Stat label="حجوزات معلّقة" value={stats.pending_bookings} icon="clock" tone={stats.pending_bookings > 0 ? 'warning' : undefined} />
         <Stat label="مستحقات المقيمين" value={formatMoney(stats.unpaid_in_house_minor, currency, { compact: true })} sub={`${stats.unpaid_in_house_count} حجز`} icon="dollar" tone={stats.unpaid_in_house_minor > 0 ? 'danger' : undefined} />
       </div>
+
+      <Card className="doors-card" title="أبواب الليلة" actions={<span className="muted small"><span className="num">{stats.occupied_tonight}</span> من <span className="num">{stats.available_tonight}</span></span>}>
+        <Doors total={stats.available_tonight} occupied={stats.occupied_tonight} held={stats.held_tonight} />
+        <div className="legend">
+          <span className="row" style={{ gap: 6 }}><span className="door is-occupied" />مشغولة</span>
+          {stats.held_tonight > 0 && <span className="row" style={{ gap: 6 }}><span className="door is-held" />محجوزة مؤقتًا</span>}
+          <span className="row" style={{ gap: 6 }}><span className="door" />فاضية</span>
+        </div>
+      </Card>
 
       <div className="today-cols">
         <Card title={`الوصول اليوم (${data.arrivals.length})`} flush>
@@ -151,11 +173,7 @@ export default function Today() {
           <Card title="جاهزية الغرف" actions={<Link to="/housekeeping" className="small">اللوحة ←</Link>}>
             <div className="hk-summary">
               {['dirty', 'cleaning', 'clean', 'inspected'].map((status) => (
-                <div key={status}>
-                  <span style={{ width: 12, height: 12, borderRadius: '50%', background: HK_COLORS[status] }} />
-                  <b className="num">{data.housekeeping[status]}</b>
-                  <span className="muted small">{HK_LABELS[status]}</span>
-                </div>
+                <Hanger key={status} status={status} count={data.housekeeping[status]} />
               ))}
             </div>
           </Card>

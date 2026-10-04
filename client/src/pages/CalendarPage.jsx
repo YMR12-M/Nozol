@@ -13,7 +13,7 @@ import { barPlacement, buildTape, monthSpans, tapeRowTemplate } from '../lib/cal
 import { BLOCK_REASON_LABELS, HK_COLORS, HK_LABELS, STATUS_LABELS } from '../lib/constants.js';
 import { Icon } from '../lib/icons.jsx';
 import {
-  Button, ErrorState, Field, Input, Loading, Modal, Notice, PageHead, Segmented, Select, useConfirm,
+  Button, ErrorState, Field, Input, Loading, Modal, Notice, PageHead, Plate, Segmented, Select, useConfirm,
 } from '../components/ui/index.js';
 
 const LEGEND = ['pending', 'confirmed', 'checked_in', 'checked_out'];
@@ -137,7 +137,7 @@ export default function CalendarPage() {
       <div className="legend" aria-label="دليل الألوان">
         {LEGEND.map((status) => <span key={status}><i style={{ background: `var(--st-${status}-bar)` }} />{STATUS_LABELS[status]}</span>)}
         <span><i style={{ background: 'var(--ink-300)' }} />مجحوبة</span>
-        <span><i style={{ background: 'var(--sand-300)' }} />تقويم خارجي</span>
+        <span><i style={{ background: 'var(--brass-500)' }} />تقويم خارجي</span>
       </div>
 
       {tape.rows.length === 0 ? (
@@ -208,7 +208,7 @@ function UnitRow({ row, days, from, span, today, canBook, canBlock, onBook, onOp
     <>
       <div className="tape-label" style={{ gridRow: row.row }} title={`${HK_LABELS[unit.housekeeping_status]}${outOfOrder ? ' — خارج الخدمة' : ''}`}>
         <span className="dot" style={{ background: HK_COLORS[unit.housekeeping_status] }} />
-        <span className="num">{unit.code}</span>
+        <Plate size="sm">{unit.code}</Plate>
         {outOfOrder && <span className="badge danger">خارج الخدمة</span>}
         {canBlock && (
           <button
@@ -268,7 +268,7 @@ function UnitRow({ row, days, from, span, today, canBook, canBlock, onBook, onOp
             title={`${reservation.guest_name} — ${reservation.code}\n${STATUS_LABELS[reservation.status]}${owes ? ' · عليه رصيد' : ''}`}
             onClick={() => onOpen(reservation.id)}
           >
-            {reservation.is_vip && <Icon name="star" size={12} />}
+            {Boolean(reservation.is_vip) && <Icon name="star" size={12} />}
             <span>{reservation.guest_name}</span>
             {owes && <span aria-label="رصيد مستحق" title="رصيد مستحق">●</span>}
           </button>

@@ -1,10 +1,18 @@
 /* ═══════════════════════════════════════════════════════════════════
-   نُزُل · NOZOL — توكنات التصميم
-   الهوية: «فيروز البحر الأحمر + نحاس الرمل»
+   نُزُل · NOZOL — هوية «مكتب الاستقبال»
 
-   الفكرة: الضيافة المصرية — بحرٌ هادئ وشاطئ دافئ. الفيروزي العميق للإطار
-   والأفعال الرئيسة (ثقة وسكينة)، والنحاسي الرملي للتمييز والتنبيه الودود.
-   الخلفية عاجٌ دافئ لا أبيض بارد: الموظف يقضي ثماني ساعات أمام الشاشة.
+   الفكرة: أول ما يصل الضيف يقابله مكتب الاستقبال — دفتر، مفاتيح، ختم، شريط حجز،
+   إيصال، ونتيجة على الحائط. الواجهة هي هذا المكتب: كل شاشة نسخة رقمية من
+   الأداة التي تؤدّي وظيفتها. فالإبداع هنا مأخوذ من عالم المشروع نفسه، لا من
+   زخرفة مستوردة. التفصيل في docs/BRAND.md.
+
+   الألوان من أشياء حقيقية على المكتب:
+     • ورق البردي والدفتر  (paper)   — الأسطح والخلفية
+     • حبر الدفتر الأزرق المائل للسواد (ink) — النص والأزرار
+     • نحاس لوحات الغرف والمفاتيح (brass)  — التمييز والتركيز
+     • أصباغ الخيامية (madder · ochre · indigo · forest · aubergine · slate) —
+       حالات الحجز كأنها أختام بأحبار الخيمية القاهرية
+     • أزرق الباب المصري (sea) — الروابط وحلقة التركيز
 
    قاعدة صارمة: لا لون ولا مقاس صريح خارج هذا الملف — كل شيء متغيّر.
    ═══════════════════════════════════════════════════════════════════ */
@@ -12,117 +20,110 @@
 :root {
   color-scheme: light;
 
-  /* ═══ 1) الفيروزي — اللون الأساسي ═══════════════════════════ */
-  --teal-50:  #eef8f9;
-  --teal-100: #d8eef0;
-  --teal-200: #b1dde1;
-  --teal-300: #7cc4cb;
-  --teal-400: #3fa3ac;
-  --teal-500: #0e6b73;   /* ← الأساسي */
-  --teal-600: #0a545b;
-  --teal-700: #073f45;
-  --teal-800: #052e33;
-  --teal-900: #031f22;
+  /* ═══ 1) الورق ═══════════════════════════════════════════════ */
+  --paper-50:  #fdfaf3;   /* ورقة نظيفة (الأسطح) */
+  --paper-100: #f6f0e1;   /* خلفية الصفحة */
+  --paper-200: #ede4cf;   /* ورق مظلَّل: رؤوس الجداول والآبار */
+  --paper-300: #ddd0b2;   /* حافة الورق */
+  --paper-400: #c4b189;
 
-  /* ═══ 2) النحاس الرملي — لمسة الدفء والتمييز ═══════════════ */
-  --sand-50:  #fbf6ec;
-  --sand-100: #f3e9d7;
-  --sand-200: #e8d4ae;
-  --sand-300: #dcb97f;
-  --copper-400: #cf9a52;
-  --copper-500: #c58b3f;  /* ← النحاس */
-  --copper-600: #a06d2a;
-  --copper-700: #76501e;
+  /* ═══ 2) الحبر — أزرق مائل للسواد ═════════════════════════ */
+  --ink-50:  #f0f1f5;
+  --ink-100: #dde0e8;
+  --ink-200: #bfc4d2;
+  --ink-300: #979eb3;
+  --ink-400: #6f7791;
+  --ink-500: #535b74;
+  --ink-600: #3d455c;
+  --ink-700: #2b3248;
+  --ink-800: #1d2338;
+  --ink-900: #131829;
+  --ink-950: #0b0f1c;
 
-  /* ═══ 3) المحايدات — حبرٌ أخضر داكن لا رمادي ═════════════ */
-  --ink-950: #101c1d;
-  --ink-900: #17262a;
-  --ink-800: #223539;
-  --ink-700: #34494d;
-  --ink-600: #4d6367;
-  --ink-500: #6b7f82;
-  --ink-400: #8d9e9f;
-  --ink-300: #b4c0bf;
-  --ink-200: #d6dedc;
-  --ink-100: #e9eeec;
-  --ink-050: #f4f6f4;
+  /* ═══ 3) النحاس ═══════════════════════════════════════════ */
+  --brass-100: #f7ebc8;
+  --brass-200: #edd493;
+  --brass-300: #dfb85f;
+  --brass-400: #c99b3a;
+  --brass-500: #a97d22;
+  --brass-600: #845f14;
+  --brass-700: #5c420d;
 
-  /* ═══ 4) الدلالات ═══════════════════════════════════════════ */
-  --green-500: #1f8a5b;
-  --green-100: #dcf3e8;
-  --green-700: #136640;
-  --amber-500: #d98b0c;
-  --amber-100: #fcefd3;
-  --amber-700: #8e5a05;
-  --red-500: #c8412f;
-  --red-100: #fbe2dd;
-  --red-700: #8e2a1d;
-  --blue-500: #2c6bb3;
-  --blue-100: #dde9f7;
-  --blue-700: #1c4880;
-  --violet-500: #7b52b8;
-  --violet-100: #ebe2f6;
-  --violet-700: #523580;
+  /* ═══ 4) أصباغ الخيامية — للحالات فقط ═════════════════════ */
+  --madder-500: #a3262c;  --madder-100: #f4dcd6;  --madder-700: #74191e;   /* أحمر الفوّة */
+  --ochre-500:  #b7791a;  --ochre-100:  #f8e7c2;  --ochre-700:  #7d500b;   /* المغرة */
+  --indigo-500: #2a4a8c;  --indigo-100: #dce4f3;  --indigo-700: #1b3166;   /* النيلة */
+  --forest-500: #2f6b43;  --forest-100: #dcebdd;  --forest-700: #1f4a2e;   /* الأخضر الداكن */
+  --aubergine-500: #6e3b6e; --aubergine-100: #ead9ea; --aubergine-700: #4c254d;
+  --slate-500:  #616876;  --slate-100:  #e6e4dc;  --slate-700:  #434958;
+  --sea-500:    #1b7a89;  --sea-100:    #d3eaee;  --sea-700:    #115561;   /* أزرق الباب */
 
-  /* ═══ 5) أدوار الواجهة (تتبدّل مع الوضع الليلي) ═══════════ */
-  --bg:           #faf8f3;
-  --bg-raised:    #ffffff;
-  --bg-sunken:    #f1ede4;
-  --bg-hover:     #f4f0e7;
-  --bg-inverse:   var(--ink-950);
-  --bg-overlay:   rgba(16, 28, 29, 0.55);
+  /* ═══ 5) أدوار الواجهة (تتبدّل مع «المكتب بالليل») ═════════ */
+  --bg:           var(--paper-100);
+  --bg-raised:    var(--paper-50);
+  --bg-sunken:    var(--paper-200);
+  --bg-hover:     #f1e9d6;
+  --bg-inverse:   var(--ink-900);
+  --bg-overlay:   rgba(11, 15, 28, 0.58);
 
-  --text:         var(--ink-950);
-  --text-soft:    var(--ink-700);
+  --text:         var(--ink-900);
+  --text-soft:    var(--ink-600);
   --text-muted:   var(--ink-500);
   --text-faint:   var(--ink-400);
-  --text-inverse: #faf8f3;
+  --text-inverse: var(--paper-50);
 
-  --line:         rgba(23, 38, 42, 0.12);
-  --line-soft:    rgba(23, 38, 42, 0.07);
-  --line-strong:  rgba(23, 38, 42, 0.22);
+  /* خطوط الدفتر بحبر بُنّي باهت، وخطوط الحقول بحبر القلم */
+  --line:         rgba(92, 66, 13, 0.20);
+  --line-soft:    rgba(92, 66, 13, 0.11);
+  --line-strong:  rgba(43, 50, 72, 0.34);
+  --margin-line:  rgba(163, 38, 44, 0.34);   /* خط هامش الدفتر الأحمر */
 
-  --brand:        var(--teal-500);
-  --brand-hover:  var(--teal-600);
-  --brand-soft:   var(--teal-50);
-  --brand-line:   var(--teal-200);
-  --on-brand:     #ffffff;
-  --accent:       var(--copper-500);
-  --accent-soft:  var(--sand-100);
+  --brand:        var(--ink-800);            /* الفعل الرئيسي: ختم حبر */
+  --brand-hover:  var(--ink-700);
+  --brand-soft:   var(--brass-100);          /* «علّام» الفلورسنت: تحديد وتمييز */
+  --brand-line:   var(--brass-300);
+  --on-brand:     var(--paper-50);
+  --accent:       var(--brass-500);
+  --accent-soft:  var(--brass-100);
+  --link:         #18727f;               /* sea-500 مُغمَّق قليلًا: 4.9:1 على ورقة الصفحة */
+  --plate-edge:   var(--brass-400);          /* حافة تحت الأزرار الرئيسية كلوحة نحاسية */
 
-  --success:      var(--green-500);  --success-soft: var(--green-100);  --success-text: var(--green-700);
-  --warning:      var(--amber-500);  --warning-soft: var(--amber-100);  --warning-text: var(--amber-700);
-  --danger:       var(--red-500);    --danger-soft:  var(--red-100);    --danger-text:  var(--red-700);
-  --info:         var(--blue-500);   --info-soft:    var(--blue-100);   --info-text:    var(--blue-700);
+  --success:      var(--forest-500);   --success-soft: var(--forest-100);   --success-text: var(--forest-700);
+  --warning:      var(--ochre-500);    --warning-soft: var(--ochre-100);    --warning-text: var(--ochre-700);
+  --danger:       var(--madder-500);   --danger-soft:  var(--madder-100);   --danger-text:  var(--madder-700);
+  --info:         var(--indigo-500);   --info-soft:    var(--indigo-100);   --info-text:    var(--indigo-700);
+  --on-danger:    var(--paper-50);
 
-  /* حالات الحجز (التقويم والشارات) */
-  --st-pending-bg: var(--amber-100);   --st-pending-fg: var(--amber-700);   --st-pending-bar: #e9b24a;
-  --st-confirmed-bg: var(--blue-100);  --st-confirmed-fg: var(--blue-700);  --st-confirmed-bar: #4a86c9;
-  --st-checked_in-bg: var(--green-100);--st-checked_in-fg: var(--green-700);--st-checked_in-bar: #36a574;
-  --st-checked_out-bg: var(--ink-100); --st-checked_out-fg: var(--ink-600); --st-checked_out-bar: #a3b1b0;
-  --st-cancelled-bg: var(--red-100);   --st-cancelled-fg: var(--red-700);   --st-cancelled-bar: #d9776a;
-  --st-no_show-bg: var(--violet-100);  --st-no_show-fg: var(--violet-700);  --st-no_show-bar: #9a78cc;
+  /* حالات الحجز (التقويم والأختام والشارات) */
+  --st-pending-bg:    var(--ochre-100);      --st-pending-fg:    var(--ochre-700);      --st-pending-bar:    var(--ochre-500);
+  --st-confirmed-bg:  var(--indigo-100);     --st-confirmed-fg:  var(--indigo-700);     --st-confirmed-bar:  var(--indigo-500);
+  --st-checked_in-bg: var(--forest-100);     --st-checked_in-fg: var(--forest-700);     --st-checked_in-bar: var(--forest-500);
+  --st-checked_out-bg: var(--slate-100);     --st-checked_out-fg: var(--slate-700);     --st-checked_out-bar: var(--slate-500);
+  --st-cancelled-bg:  var(--madder-100);     --st-cancelled-fg:  var(--madder-700);     --st-cancelled-bar:  var(--madder-500);
+  --st-no_show-bg:    var(--aubergine-100);  --st-no_show-fg:    var(--aubergine-700);  --st-no_show-bar:    var(--aubergine-500);
 
-  /* حالات النظافة */
-  --hk-dirty: var(--red-500);
-  --hk-cleaning: var(--amber-500);
-  --hk-clean: var(--green-500);
-  --hk-inspected: var(--teal-500);
+  /* حالات النظافة (علّاقات الأبواب) */
+  --hk-dirty: var(--madder-500);
+  --hk-cleaning: var(--ochre-500);
+  --hk-clean: var(--forest-500);
+  --hk-inspected: var(--sea-500);
 
-  /* ═══ 6) الخطوط ════════════════════════════════════════════ */
-  --font: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* ═══ 6) الخطوط: ثلاثة أدوار لكل منها وظيفة ═══════════════ */
+  --font:         'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;   /* القراءة */
+  --font-display: 'Reem Kufi', 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;          /* لوحات الغرف والأرقام والعناوين */
+  --font-hand:    'Aref Ruqaa', 'IBM Plex Sans Arabic', serif;                           /* لمسة اليد: التحية، الأسماء على الأشرطة */
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --fs-xs: 0.75rem;
   --fs-sm: 0.8125rem;
   --fs-md: 0.9375rem;
   --fs-lg: 1.0625rem;
   --fs-xl: 1.25rem;
-  --fs-2xl: 1.625rem;
-  --fs-3xl: 2.125rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
   --lh: 1.65;
 
-  /* ═══ 7) الفراغات والأشكال ═════════════════════════════════ */
+  /* ═══ 7) الفراغات والأشكال: ورق بحواف شبه حادّة ═════════════ */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -131,19 +132,21 @@
   --sp-6: 2rem;
   --sp-7: 3rem;
 
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 5px;
+  --r-xl: 8px;
   --r-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgba(16, 28, 29, 0.06);
-  --shadow-md: 0 4px 14px rgba(16, 28, 29, 0.08);
-  --shadow-lg: 0 14px 40px rgba(16, 28, 29, 0.16);
+  /* ظلال «ورق على مكتب»: شفة رفيعة، لا هالة ناعمة */
+  --shadow-sm: 0 1px 0 rgba(92, 66, 13, 0.16);
+  --shadow-md: 0 1px 0 rgba(92, 66, 13, 0.20), 0 12px 24px -14px rgba(43, 32, 10, 0.50);
+  --shadow-lg: 0 2px 0 rgba(92, 66, 13, 0.22), 0 30px 50px -22px rgba(20, 14, 4, 0.60);
 
-  --ring: 0 0 0 3px rgba(14, 107, 115, 0.28);
+  /* حلقة التركيز: فاصل ورقي ثم نحاس */
+  --ring: 0 0 0 2px var(--paper-50), 0 0 0 4px var(--brass-400);
 
-  --sidebar-w: 248px;
+  --sidebar-w: 264px;
   --topbar-h: 60px;
   --z-sticky: 20;
   --z-drawer: 60;
@@ -153,50 +156,71 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --t-fast: 120ms;
   --t-base: 200ms;
+
+  /* ═══ 8) خامات ══════════════════════════════════════════════ */
+  /* حبيبات ورق ناعمة جدًّا فوق الخلفية (ثابتة، بلا كلفة رسم) */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .40  0 0 0 0 .29  0 0 0 0 .12  0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+  /* خطوط مائلة رفيعة: حجب الوحدات وأيام الإغلاق */
+  --hatch: repeating-linear-gradient(135deg, transparent 0 5px, rgba(43, 50, 72, 0.22) 5px 6px);
 }
 
-/* ─── الوضع الليلي ─── */
+/* ─── «المكتب بالليل»: مصباح نحاسي على خشب داكن ─── */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg:           #0e1819;
-  --bg-raised:    #152426;
-  --bg-sunken:    #0a1213;
-  --bg-hover:     #1a2d30;
-  --bg-overlay:   rgba(2, 8, 9, 0.7);
 
-  --text:         #eaf1f0;
-  --text-soft:    #c3d0cf;
-  --text-muted:   #93a5a6;
-  --text-faint:   #6c8082;
+  --bg:           #10151f;
+  --bg-raised:    #171e2c;
+  --bg-sunken:    #0b0f18;
+  --bg-hover:     #1d2638;
+  --bg-inverse:   var(--paper-100);
+  --bg-overlay:   rgba(4, 7, 14, 0.74);
 
-  --line:         rgba(214, 231, 230, 0.14);
-  --line-soft:    rgba(214, 231, 230, 0.08);
-  --line-strong:  rgba(214, 231, 230, 0.26);
+  --text:         #f3ead6;
+  --text-soft:    #d8ceb6;
+  --text-muted:   #a9a291;
+  --text-faint:   #7f7a6b;
+  --text-inverse: var(--ink-900);
 
-  --brand:        #3fa3ac;
-  --brand-hover:  #5bb8c0;
-  --brand-soft:   rgba(63, 163, 172, 0.14);
-  --brand-line:   rgba(63, 163, 172, 0.4);
-  --on-brand:     #04181a;
-  --accent:       #dcb97f;
-  --accent-soft:  rgba(220, 185, 127, 0.14);
+  --line:         rgba(232, 214, 170, 0.17);
+  --line-soft:    rgba(232, 214, 170, 0.09);
+  --line-strong:  rgba(232, 214, 170, 0.34);
+  --margin-line:  rgba(230, 110, 100, 0.40);
 
-  --success-soft: rgba(31, 138, 91, 0.2);  --success-text: #67d3a0;
-  --warning-soft: rgba(217, 139, 12, 0.2); --warning-text: #f0b95a;
-  --danger-soft:  rgba(200, 65, 47, 0.2);  --danger-text:  #f08a7a;
-  --info-soft:    rgba(44, 107, 179, 0.22);--info-text:    #86b4ea;
+  --brand:        var(--brass-300);
+  --brand-hover:  var(--brass-200);
+  --brand-soft:   rgba(223, 184, 95, 0.14);
+  --brand-line:   rgba(223, 184, 95, 0.46);
+  --on-brand:     var(--ink-950);
+  --accent:       var(--brass-300);
+  --accent-soft:  rgba(223, 184, 95, 0.13);
+  --link:         #72c3cf;
+  --plate-edge:   var(--brass-600);
 
-  --st-pending-bg: rgba(217, 139, 12, 0.2);  --st-pending-fg: #f0b95a;
-  --st-confirmed-bg: rgba(44, 107, 179, 0.24); --st-confirmed-fg: #8dbbee;
-  --st-checked_in-bg: rgba(31, 138, 91, 0.22); --st-checked_in-fg: #67d3a0;
-  --st-checked_out-bg: rgba(141, 158, 159, 0.18); --st-checked_out-fg: #a9b9ba;
-  --st-cancelled-bg: rgba(200, 65, 47, 0.22); --st-cancelled-fg: #f08a7a;
-  --st-no_show-bg: rgba(123, 82, 184, 0.24);  --st-no_show-fg: #c0a4ea;
+  --success:      #55a974;  --success-soft: rgba(85, 169, 116, 0.18);  --success-text: #8fd3a6;
+  --warning:      #d99a3a;  --warning-soft: rgba(217, 154, 58, 0.18);  --warning-text: #f0c26f;
+  --danger:       #d4574f;  --danger-soft:  rgba(212, 87, 79, 0.20);   --danger-text:  #f19a8f;
+  --info:         #5f87d6;  --info-soft:    rgba(95, 135, 214, 0.20);  --info-text:    #9fbcf0;
+  --on-danger:    var(--ink-950);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.6);
-  --ring: 0 0 0 3px rgba(91, 184, 192, 0.35);
+  --st-pending-bg:    rgba(217, 154, 58, 0.18);  --st-pending-fg:    #f0c26f;   --st-pending-bar:    #d99a3a;
+  --st-confirmed-bg:  rgba(95, 135, 214, 0.20);   --st-confirmed-fg:  #9fbcf0;   --st-confirmed-bar:  #5f87d6;
+  --st-checked_in-bg: rgba(85, 169, 116, 0.20);   --st-checked_in-fg: #8fd3a6;   --st-checked_in-bar: #55a974;
+  --st-checked_out-bg: rgba(160, 166, 180, 0.15); --st-checked_out-fg: #b3b8c6;  --st-checked_out-bar: #8a90a2;
+  --st-cancelled-bg:  rgba(212, 87, 79, 0.20);    --st-cancelled-fg:  #f19a8f;   --st-cancelled-bar:  #d4574f;
+  --st-no_show-bg:    rgba(160, 100, 168, 0.22);  --st-no_show-fg:    #d3a8da;   --st-no_show-bar:    #a064a8;
+
+  --hk-dirty: #d4574f;
+  --hk-cleaning: #d99a3a;
+  --hk-clean: #55a974;
+  --hk-inspected: #5fb2c0;
+
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 1px 0 rgba(0, 0, 0, 0.5), 0 12px 24px -12px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.55), 0 30px 50px -20px rgba(0, 0, 0, 0.85);
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--brass-300);
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .92  0 0 0 0 .84  0 0 0 0 .66  0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  --hatch: repeating-linear-gradient(135deg, transparent 0 5px, rgba(232, 214, 170, 0.18) 5px 6px);
 }
 
 @media (prefers-reduced-motion: reduce) {

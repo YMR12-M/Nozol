@@ -1,6 +1,7 @@
 import { formatDate, formatMoney, formatNumber } from '../../lib/format.js';
 import { HK_COLORS, HK_LABELS, STATUS_LABELS } from '../../lib/constants.js';
 import { Icon } from '../../lib/icons.jsx';
+import { Art, ART_FOR_ICON } from './Art.jsx';
 
 export function Card({ title, actions, children, flush = false, className = '', bodyClassName = '' }) {
   return (
@@ -67,10 +68,11 @@ export function Skeleton({ height = 16, width = '100%', style }) {
   return <div className="skeleton" style={{ height, width, ...style }} aria-hidden="true" />;
 }
 
-export function EmptyState({ icon = 'info', title, description, action }) {
+/** حالة فارغة برسمة من أدوات المكتب؛ تُختار تلقائيًّا من اسم الأيقونة، أو تُمرَّر صراحةً بـ `art` */
+export function EmptyState({ icon = 'info', art, title, description, action }) {
   return (
     <div className="empty">
-      <div className="icon-wrap"><Icon name={icon} size={26} /></div>
+      <Art name={art ?? ART_FOR_ICON[icon] ?? 'lantern'} />
       <h3>{title}</h3>
       {description && <p style={{ maxWidth: 420 }}>{description}</p>}
       {action}
@@ -127,7 +129,7 @@ export function KeyValue({ items }) {
 
 export function Avatar({ name, size = 36 }) {
   const letter = (name ?? '').trim()[0] ?? '؟';
-  return <span className="avatar" style={{ width: size, height: size, fontSize: size * 0.42 }}>{letter}</span>;
+  return <span className="avatar" style={{ width: size, height: size, fontSize: size * 0.58 }}>{letter}</span>;
 }
 
 export function Tabs({ value, onChange, items }) {
@@ -149,7 +151,7 @@ export function Pagination({ meta, onPage }) {
   const to = Math.min(meta.page * meta.page_size, meta.total);
   return (
     <div className="pagination">
-      <span className="num">{from}–{to} من {meta.total}</span>
+      <span><span className="num">{from}–{to}</span> من <span className="num">{meta.total}</span></span>
       <div className="row" style={{ gap: 6 }}>
         <button type="button" className="btn secondary sm" disabled={meta.page <= 1} onClick={() => onPage(meta.page - 1)}>
           <Icon name="chevron-right" size={16} /> السابق

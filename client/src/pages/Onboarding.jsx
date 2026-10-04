@@ -172,7 +172,7 @@ export default function Onboarding() {
               <Field label="من رقم" error={units.errors['range.from']}>{(p) => <Input {...p} type="number" min={0} value={uv.from} onChange={units.on('from')} />}</Field>
               <Field label="إلى رقم" error={units.errors['range.to']}>{(p) => <Input {...p} type="number" min={0} value={uv.to} onChange={units.on('to')} />}</Field>
             </div>
-            <p className="muted small num">هتتضاف {Math.max(0, Number(uv.to) - Number(uv.from) + 1)} وحدة: {uv.prefix}{uv.from} … {uv.prefix}{uv.to}</p>
+            <p className="muted small">هتتضاف <span className="num">{Math.max(0, Number(uv.to) - Number(uv.from) + 1)}</span> وحدة: <span className="num">{uv.prefix}{uv.from} … {uv.prefix}{uv.to}</span></p>
             <div className="row end">
               <Button variant="primary" size="lg" loading={busy} disabled={Number(uv.to) < Number(uv.from)} onClick={createUnits}>إنهاء وبدء الاستخدام</Button>
             </div>

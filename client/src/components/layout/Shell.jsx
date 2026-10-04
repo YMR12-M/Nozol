@@ -77,7 +77,7 @@ function SidebarContent({ onNavigate }) {
   return (
     <>
       <div className="brand">
-        <Logo size={36} />
+        <Logo size={40} />
         <div><b>نُزُل</b><small>إدارة الضيافة</small></div>
       </div>
       <Navigation onNavigate={onNavigate} />
@@ -85,10 +85,10 @@ function SidebarContent({ onNavigate }) {
         <div className="user">
           <Avatar name={user.full_name} />
           <div className="grow" style={{ minWidth: 0 }}>
-            <div className="truncate bold" style={{ color: '#fff' }}>{user.full_name}</div>
-            <div className="xsmall" style={{ color: 'var(--teal-200)' }}>{ROLE_LABELS[user.role]}</div>
+            <div className="truncate bold user-name">{user.full_name}</div>
+            <div className="xsmall user-role">{ROLE_LABELS[user.role]}</div>
           </div>
-          <button type="button" className="btn ghost icon sm" style={{ color: '#cfe3e5' }} onClick={logout} aria-label="تسجيل الخروج" title="تسجيل الخروج">
+          <button type="button" className="btn ghost icon sm user-logout" onClick={logout} aria-label="تسجيل الخروج" title="تسجيل الخروج">
             <Icon name="logout" size={18} />
           </button>
         </div>
@@ -100,13 +100,14 @@ function SidebarContent({ onNavigate }) {
 function PropertySwitcher() {
   const { properties, property, select } = useProperty();
   if (properties.length === 0) return null;
+  // اسم المنشأة لوحة نحاسية على الشريط العلوي (تفتح قائمة التبديل لو عند المالك أكثر من منشأة)
   if (properties.length === 1) {
-    return <span className="row small" style={{ gap: 6 }}><Icon name="building" size={18} /><b className="truncate" style={{ maxWidth: 220 }}>{property?.name_ar}</b></span>;
+    return <span className="plaque"><Icon name="building" size={18} /><span className="truncate" style={{ maxWidth: 240 }}>{property?.name_ar}</span></span>;
   }
   return (
     <Menu align="start" trigger={(
-      <button type="button" className="btn secondary sm">
-        <Icon name="building" size={16} /><span className="truncate" style={{ maxWidth: 180 }}>{property?.name_ar}</span><Icon name="chevron-down" size={14} />
+      <button type="button" className="plaque" style={{ cursor: 'pointer' }}>
+        <Icon name="building" size={18} /><span className="truncate" style={{ maxWidth: 200 }}>{property?.name_ar}</span><Icon name="chevron-down" size={14} />
       </button>
     )}
     >

@@ -14,7 +14,7 @@ import { AMENITIES, HK_LABELS, MEAL_LABELS, UNIT_KIND_LABELS } from '../../lib/c
 import { Icon } from '../../lib/icons.jsx';
 import { findPlan, isChosen, lineProblem } from '../../lib/reservations.js';
 import {
-  Badge, Button, EmptyState, Field, Loading, Notice, Select, Skeleton, Stepper,
+  Art, Badge, Button, EmptyState, Field, Loading, Notice, Select, Skeleton, Stepper,
 } from '../ui/index.js';
 
 /** متوسط سعر الليلة (غرفة + أفراد + وجبات) قبل الخدمة والضريبة */
@@ -68,8 +68,8 @@ function OfferCard({ result, line, remaining, currency, canOverride, onPick }) {
   const amenities = (type.amenities ?? []).filter((key) => AMENITIES[key]).slice(0, 6);
   return (
     <div className={`offer ${line.unit_type_id === type.id ? 'selected' : ''}`} style={blocked ? { opacity: 0.7 } : undefined}>
-      <div className="photo" style={photo ? { backgroundImage: `url(${photo})` } : undefined}>
-        {!photo && <Icon name="bed" size={32} />}
+      <div className={`photo ${photo ? '' : 'is-empty'}`} style={photo ? { backgroundImage: `url(${photo})` } : undefined}>
+        {!photo && <Art name="key" width={92} />}
       </div>
       <div className="stack sm" style={{ minWidth: 0 }}>
         <div className="row wrap" style={{ gap: 8 }}>
@@ -80,7 +80,7 @@ function OfferCard({ result, line, remaining, currency, canOverride, onPick }) {
         <div className="muted small row wrap" style={{ gap: 12 }}>
           <span>حتى {type.max_adults} بالغين{type.max_children > 0 ? ` + ${type.max_children} أطفال` : ''}</span>
           {type.beds && <span>{type.beds}</span>}
-          {type.size_sqm && <span className="num">{type.size_sqm} م²</span>}
+          {type.size_sqm && <span><span className="num">{type.size_sqm}</span> م²</span>}
         </div>
         {amenities.length > 0 && (
           <div className="row wrap" style={{ gap: 6 }}>

@@ -4,24 +4,31 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useForm } from '../lib/forms.js';
 import { useDocumentTitle } from '../lib/hooks.js';
 import { Logo } from '../lib/icons.jsx';
-import { Button, Field, Input, Notice } from '../components/ui/index.js';
+import { Button, Field, Input, LobbyScene, Notice } from '../components/ui/index.js';
 
+/**
+ * مدخل الفندق: يسار الشاشة (يمينها بالعربية) بوّابة مضاءة فيها مكتب الاستقبال، والاستمارة على ورقة.
+ * اللوحة الجانبية زينة فقط (aria-hidden) فالعنوان الحقيقي h1 داخل الاستمارة.
+ */
 export function AuthLayout({ title, subtitle, children, footer }) {
   return (
     <div className="auth-screen">
-      <section className="auth-hero">
-        <div className="row"><Logo size={44} /><b style={{ fontSize: 'var(--fs-xl)' }}>نُزُل</b></div>
-        <div>
-          <h1>ضيافة منظّمة، حجوزات بلا أخطاء.</h1>
-          <p>إدارة الغرف والشاليهات والحجوزات والفواتير والتنظيف من مكان واحد — على الكمبيوتر والموبايل.</p>
+      <section className="auth-lobby" aria-hidden="true">
+        <LobbyScene />
+        <div className="lobby-sign">
+          <b>نُزُل</b>
+          <span>اتفضّل.. الضيافة تبدأ من دفتر منظّم</span>
         </div>
-        <small style={{ color: 'var(--teal-200)' }}>© نُزُل</small>
+        <small className="lobby-foot">© نُزُل</small>
       </section>
       <section className="auth-card-wrap">
         <div className="auth-card stack lg">
-          <div className="row" style={{ display: 'none' }} />
+          <div className="auth-brand">
+            <Logo size={44} />
+            <div><b>نُزُل</b><small>إدارة الضيافة</small></div>
+          </div>
           <div>
-            <h2 style={{ fontSize: 'var(--fs-2xl)' }}>{title}</h2>
+            <h1>{title}</h1>
             {subtitle && <p className="muted" style={{ marginTop: 4 }}>{subtitle}</p>}
           </div>
           {children}

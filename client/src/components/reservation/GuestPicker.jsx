@@ -30,8 +30,8 @@ function useGuestSearch(text) {
 function GuestBadges({ guest }) {
   return (
     <>
-      {guest.is_vip && <Badge tone="accent">VIP</Badge>}
-      {guest.is_blacklisted && <Badge tone="danger">قائمة سوداء</Badge>}
+      {Boolean(guest.is_vip) && <Badge tone="accent">VIP</Badge>}
+      {Boolean(guest.is_blacklisted) && <Badge tone="danger">قائمة سوداء</Badge>}
     </>
   );
 }
@@ -145,7 +145,7 @@ export default function GuestPicker({ guest, onChange, form, canOverride, blackl
           </div>
           <Button size="sm" onClick={() => onChange(null)}>تغيير</Button>
         </div>
-        {data.is_blacklisted && (
+        {Boolean(data.is_blacklisted) && (
           <Notice tone="danger" icon="ban">
             <div className="stack sm">
               <span>النزيل ده في القائمة السوداء.{canOverride ? '' : ' الحجز له محتاج مدير أو مالك.'}</span>

@@ -95,15 +95,22 @@ export function Icon({ name, size = 20, strokeWidth = 1.8, className, style, ...
   );
 }
 
-/** شعار نُزُل (أيقونة التطبيق) */
+/**
+ * شعار نُزُل: لوحة نحاسية مقوّسة كباب الغرفة أو لوحة مفتاحها، وفي قلبها ثقب المفتاح،
+ * ومسماران صغيران في الأسفل. (واسم «نُزُل» يُكتب بخطّ الرقعة بجواره في كل مكان.)
+ */
 export function Logo({ size = 36 }) {
+  const brass = { fill: 'var(--brass-400)' };
+  const ink = { fill: 'var(--ink-950)' };
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="نُزُل" className="logo">
-      <rect width="64" height="64" rx="14" fill="#c58b3f" />
-      <path d="M14 44V26a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v18" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-      <path d="M10 44h44" stroke="#073f45" strokeWidth="5" strokeLinecap="round" />
-      <rect x="20" y="28" width="10" height="8" rx="2" fill="#fff" />
-      <rect x="34" y="28" width="10" height="8" rx="2" fill="#fff" />
+      <path d="M9 59V29a23 23 0 0 1 46 0v30z" style={brass} />
+      <path d="M9 59V29a23 23 0 0 1 46 0v30z" style={{ fill: 'none', stroke: 'var(--brass-700)', strokeWidth: 1.4 }} />
+      <path d="M14.5 54V30a17.5 17.5 0 0 1 35 0v24" style={{ fill: 'none', stroke: 'var(--ink-950)', strokeWidth: 1.4, opacity: 0.45 }} />
+      <circle cx="32" cy="29" r="6.2" style={ink} />
+      <path d="M28.6 33.5h6.8L38 49H26z" style={ink} />
+      <circle cx="17.5" cy="54.5" r="1.4" style={{ fill: 'var(--brass-700)' }} />
+      <circle cx="46.5" cy="54.5" r="1.4" style={{ fill: 'var(--brass-700)' }} />
     </svg>
   );
 }

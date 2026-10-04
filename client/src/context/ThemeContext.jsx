@@ -12,7 +12,7 @@ export function ThemeProvider({ children }) {
     const apply = () => {
       const dark = preference === 'dark' || (preference === 'auto' && media.matches);
       document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0e1819' : '#0e6b73');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0b0f1c' : '#1d2338');
     };
     apply();
     media.addEventListener('change', apply);

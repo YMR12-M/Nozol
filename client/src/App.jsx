@@ -3,7 +3,7 @@ import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { PropertyProvider } from './context/PropertyContext.jsx';
 import Shell from './components/layout/Shell.jsx';
-import { Loading } from './components/ui/index.js';
+import { InkFilters, Loading } from './components/ui/index.js';
 
 // الصفحات تُحمَّل عند الطلب: شاشة الدخول لا تنتظر كود التقارير والرسوم البيانية
 const page = (loader) => lazy(loader);
@@ -119,6 +119,7 @@ function PrintFrame() {
 export default function App() {
   return (
     <AuthProvider>
+      <InkFilters />
       <AppRoutes />
     </AuthProvider>
   );
